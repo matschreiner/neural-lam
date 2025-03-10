@@ -1,11 +1,20 @@
-if __name__ == "__main__":
-    # Run this code to visualize the learning rate schedule
-    # Third-party
-    import matplotlib.pyplot as plt
+# Third-party
+import matplotlib.pyplot as plt
+import torch
 
+# First-party
+from neural_lam import lr_scheduler
+
+
+def get_optimizer():
     model = torch.nn.Linear(1, 1)
     opt = torch.optim.Adam(model.parameters())
-    scheduler = WarmupCosineAnnealingLR(
+    return opt
+
+
+def visualize_warmup_cosine_annealing():
+    opt = get_optimizer()
+    scheduler = lr_scheduler.WarmupCosineAnnealingLR(
         opt, warmup_steps=20, annealing_steps=100
     )
 
